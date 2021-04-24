@@ -15,8 +15,8 @@ public class RequestDao {
 
     public void addRequest(String text){
 
-        UserDao udao = new UserDao();
-        String currentUserId;
+        UserDao userDao = new UserDao();
+        String reason;
         UserData user ;
 
 //        if(fireuser != null) {
