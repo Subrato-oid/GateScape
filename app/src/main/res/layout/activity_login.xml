@@ -39,8 +39,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:id="@+id/username1"
-            android:hint="Roll No."
+            android:id="@+id/Email"
+            android:hint="Email Id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -101,5 +101,13 @@
         android:background="#000"
         android:transitionName="signUp_login"/>
 
+    <Button
+        android:id="@+id/SignOutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Sign Out"
+        android:textColor="#fff"
+        android:background="#000" />
 
 </LinearLayout>

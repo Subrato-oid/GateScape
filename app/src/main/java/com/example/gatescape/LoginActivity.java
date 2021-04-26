@@ -15,14 +15,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.gatescape.daos.UserDao;
 import com.example.gatescape.models.UserData;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -34,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
-    Button  Login , SignUp , ForgetPass;
-    TextInputLayout Username , Password;
+    Button  Login , SignUp , ForgetPass , SignOut;
+    TextInputLayout Email , Password;
     TextView welcome_text , continue_text;
 
     @Override
@@ -47,8 +53,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Login = findViewById(R.id.LoginButton1);
         SignUp = findViewById(R.id.SignUpButton1);
+        SignOut = findViewById(R.id.SignOutButton);
         ForgetPass = findViewById(R.id.ForgotPassword);
-        Username = findViewById(R.id.username1);
+        Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password1);
         welcome_text = findViewById(R.id.welcomeText1);
         continue_text =findViewById(R.id.continue_text1);
@@ -59,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext() , SignUpActivity.class);
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this , Pair.create(welcome_text , "logo_text"),
-                Pair.create(continue_text , "continue_text"), Pair.create(Username , "username_text"), Pair.create(ForgetPass , "middle_text") ,
+                Pair.create(continue_text , "continue_text"), Pair.create(Email , "username_text"), Pair.create(ForgetPass , "middle_text") ,
                 Pair.create(Password , "password_text") , Pair.create(Login , "login_singUp"), Pair.create(SignUp , "signUp_login"));
 
                 startActivity(intent , options.toBundle());
@@ -72,54 +79,78 @@ public class LoginActivity extends AppCompatActivity {
                 if(!validateRoll_no() | !validatePassword()){
                     return;
                 }else{
-                    isUser();
+                    firebaseAuth();
                 }
+            }
+        });
+
+        SignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
             }
         });
     }
 
-    private void isUser() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            updateUI(currentUser);
+        }
+    }
 
-        String Roll_No = Username.getEditText().getText().toString();
-        String Enteredpassword = Password.getEditText().getText().toString();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference userCollection = db.collection("users");
+    private void firebaseAuth() {
 
-        userCollection.whereEqualTo("roll_no" , Roll_No).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
+        String email = Email.getEditText().getText().toString();
+        String password = Password.getEditText().getText().toString();
 
-                        UserData dbUserInfo = document.toObject(UserData.class);
-
-                        String dbpassword = dbUserInfo.getPassword();
-
-                        if(dbpassword.equals(Enteredpassword)){
-                            startActivity(new Intent(LoginActivity.this , UserActivity1.class));
-                        }else{
-                            Password.setError("Wrong password");
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
                         }
                     }
-                }else{
-                    Username.setError("Roll No. not found");
-                    Log.d(TAG , "Error getting Documents" , task.getException());
-                }
-            }
-        });
+                });
+
     }
 
+    private void updateUI(FirebaseUser firebaseUser) {
+
+        if(firebaseUser != null){
+            startActivity(new Intent(LoginActivity.this , UserActivity1.class));
+        }else{
+            return;
+        }
+
+    }
+
+
+    // validation function for Roll_no and Password , to ensure that they are not Empty.
     private Boolean validateRoll_no(){
 
-        String val = Username.getEditText().getText().toString();
+        String val = Email.getEditText().getText().toString();
 
         if(val.isEmpty()){
-            Username.setError("Field cannot be empty");
+            Email.setError("Field cannot be empty");
             return false;
         }else{
-            Username.setError(null);
-            Username.setErrorEnabled(false);
+            Email.setError(null);
+            Email.setErrorEnabled(false);
             return true;
         }
     }

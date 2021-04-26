@@ -16,11 +16,20 @@ public class UserActivity1 extends AppCompatActivity {
         setContentView(R.layout.activity_user1);
 
         Apply = findViewById(R.id.Apply);
+        History = findViewById(R.id.History);
+        Status = findViewById(R.id.Status);
 
         Apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserActivity1.this , UserActivity2.class));
+            }
+        });
+
+        History.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(UserActivity1.this , UserActivity_3.class));
             }
         });
     }

@@ -3,17 +3,17 @@ package com.example.gatescape.models;
 public class RequestInfo {
 
     String reason;
-    UserData userData;
+    UserData user;
     Long createdAt;
-
-    public RequestInfo(String reason, UserData userData, Long createdAt) {
-        this.reason = reason;
-        this.userData = userData;
-        this.createdAt = createdAt;
-    }
 
     public RequestInfo() {
 
+    }
+
+    public RequestInfo(String reason, UserData user, Long createdAt) {
+        this.reason = reason;
+        this.user = user;
+        this.createdAt = createdAt;
     }
 
     public String getReason() {
@@ -24,13 +24,6 @@ public class RequestInfo {
         this.reason = reason;
     }
 
-    public UserData getUserData() {
-        return userData;
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-    }
 
     public Long getCreatedAt() {
         return createdAt;
@@ -38,5 +31,12 @@ public class RequestInfo {
 
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
+    }
+    public UserData getUser() {
+        return user;
+    }
+
+    public void setUser(UserData user) {
+        this.user = user;
     }
 }

@@ -2,7 +2,14 @@ package com.example.gatescape.models;
 
 public class UserData {
 
-    String name , branch , sem , roll_no , email , phone_no , password;
+    String name;
+    String branch;
+    String sem;
+    String roll_no;
+    String email;
+    String phone_no;
+    String password;
+
 
     public UserData(String name, String branch, String sem, String roll_no, String email, String phone_no, String password) {
         this.name = name;
@@ -73,4 +80,7 @@ public class UserData {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+
 }
