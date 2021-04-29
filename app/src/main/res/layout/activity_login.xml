@@ -85,7 +85,7 @@
         android:id="@+id/LoginButton1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="120dp"
         android:text="Login"
         android:textColor="@color/white"
         android:background="@color/black"
@@ -101,13 +101,5 @@
         android:background="#000"
         android:transitionName="signUp_login"/>
 
-    <Button
-        android:id="@+id/SignOutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Sign Out"
-        android:textColor="#fff"
-        android:background="#000" />
 
 </LinearLayout>

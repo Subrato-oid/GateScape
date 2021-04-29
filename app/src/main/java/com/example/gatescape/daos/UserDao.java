@@ -46,7 +46,8 @@ public class UserDao {
                     Log.i(TAG , "Operation Successful");
 
                     Long currentTime = System.currentTimeMillis();
-                    RequestInfo gp = new RequestInfo(text, user , currentTime);
+                    Boolean approve = false;
+                    RequestInfo gp = new RequestInfo(text, user , currentTime , false);
                     CollectionReference ReqCollection = db.collection("Requests");
                     ReqCollection.document().set(gp);
                 }

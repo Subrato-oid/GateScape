@@ -30,16 +30,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     Button  Login , SignUp , ForgetPass , SignOut;
     TextInputLayout Email , Password;
     TextView welcome_text , continue_text;
@@ -53,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Login = findViewById(R.id.LoginButton1);
         SignUp = findViewById(R.id.SignUpButton1);
-        SignOut = findViewById(R.id.SignOutButton);
+//        SignOut = findViewById(R.id.SignOutButton);
         ForgetPass = findViewById(R.id.ForgotPassword);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password1);
@@ -84,12 +89,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        SignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-            }
-        });
+//        SignOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mAuth.signOut();
+//            }
+//        });
     }
 
     @Override
@@ -98,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            updateUI(currentUser);
+            updateUI(currentUser , currentUser.getUid());
         }
     }
 
@@ -116,29 +121,39 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            updateUI(user , Objects.requireNonNull(user).getUid());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            updateUI(null , null);
                         }
                     }
                 });
 
     }
 
-    private void updateUI(FirebaseUser firebaseUser) {
+    private void updateUI(FirebaseUser firebaseUser , String uid) {
 
         if(firebaseUser != null){
-            startActivity(new Intent(LoginActivity.this , UserActivity1.class));
+            DocumentReference docRef = db.collection("users").document(uid);
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if(documentSnapshot.getBoolean("userType")){
+                        startActivity(new Intent(LoginActivity.this , TeacherActivity1.class));
+                    }else {
+                        startActivity(new Intent(LoginActivity.this , UserActivity1.class));
+                    }
+                }
+            });
+            startActivity(new Intent(LoginActivity.this , TeacherActivity1.class));
         }else{
-            return;
+            return ;
         }
 
     }
-
 
     // validation function for Roll_no and Password , to ensure that they are not Empty.
     private Boolean validateRoll_no(){

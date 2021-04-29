@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -22,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -100,9 +98,10 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            UserData userData = new UserData(username, user_branch ,user_sem, user_roll_no, user_email, user_phone_no, user_password);
+                            Boolean user_type = false;
+                            UserData userData = new UserData(username, user_branch ,user_sem, user_roll_no, user_email, user_phone_no, user_password , user_type);
                             UserDao userDao = new UserDao();
-                            userDao.addUser(userData , mAuth.getCurrentUser().getUid());
+                            userDao.addUser(userData , Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
 
                             updateUI(user);
                         } else {
@@ -167,11 +166,22 @@ public class SignUpActivity extends AppCompatActivity {
     private Boolean validateRoll_no() {
         String val = roll_no.getEditText().getText().toString();
 
+//        Boolean check_roll ;
+//        CollectionReference colRef = db.collection("users");
+//        colRef.whereEqualTo("roll_no" , val)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if(task.isSuccessful()){
+//                    check_roll = false;
+//                }
+//            }
+//        });
+
         if(val.isEmpty()){
             roll_no.setError("Field cannot be empty");
             return (false);
-        }
-        else{
+        } else{
             roll_no.setError(null);
             return true;
         }

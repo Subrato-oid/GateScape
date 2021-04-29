@@ -29,8 +29,10 @@ public class UserActivity1 extends AppCompatActivity {
         History.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(UserActivity1.this , UserActivity_3.class));
+                startActivity(new Intent(UserActivity1.this , UserActivity3.class));
             }
         });
+
+
     }
 }

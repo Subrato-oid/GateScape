@@ -1,7 +1,13 @@
 package com.example.gatescape;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +18,8 @@ import com.example.gatescape.daos.UserDao;
 import com.example.gatescape.models.UserData;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class UserActivity2 extends AppCompatActivity {
 
@@ -32,12 +40,35 @@ public class UserActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String reason = Reason_text.getEditText().getText().toString();
+                String reason = Objects.requireNonNull(Reason_text.getEditText()).getText().toString();
                 RequestDao requestDao = new RequestDao();
-                requestDao.addRequest(reason);
-                finish();
-
+                if(!reason.isEmpty()) {
+                    requestDao.addRequest(reason);
+                    Notification();
+                    finish();
+                }
+                else {
+                    Reason_text.setError("Reason can't be empty");
+                    recreate();
+                }
             }
         });
+    }
+
+    private void Notification(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("n" , "n" , NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this , "n")
+                .setContentText("GateScape")
+                .setSmallIcon(R.drawable.ic_user)
+                .setAutoCancel(true)
+                .setContentText("New Gate Pass Request Added");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999 , builder.build());
     }
 }

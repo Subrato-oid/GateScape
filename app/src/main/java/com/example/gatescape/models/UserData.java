@@ -9,9 +9,10 @@ public class UserData {
     String email;
     String phone_no;
     String password;
+    Boolean UserType; // Teacher = true and Student = false
 
 
-    public UserData(String name, String branch, String sem, String roll_no, String email, String phone_no, String password) {
+    public UserData(String name, String branch, String sem, String roll_no, String email, String phone_no, String password , Boolean userType) {
         this.name = name;
         this.branch = branch;
         this.sem = sem;
@@ -19,6 +20,7 @@ public class UserData {
         this.email = email;
         this.phone_no = phone_no;
         this.password = password;
+        this.UserType = userType;
     }
 
     public UserData() {
@@ -81,6 +83,12 @@ public class UserData {
         this.password = password;
     }
 
+    public Boolean getUserType() {
+        return UserType;
+    }
 
+    public void setUserType(Boolean userType) {
+        UserType = userType;
+    }
 
 }
