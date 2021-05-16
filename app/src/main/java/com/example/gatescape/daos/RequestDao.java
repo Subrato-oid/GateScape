@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.gatescape.models.RequestInfo;
 import com.example.gatescape.models.UserData;
+import com.example.gatescape.util.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +33,6 @@ public class RequestDao {
     public void addRequest(String text) {
 
         UserDao userDao = new UserDao();
-
         userDao.getUserById(text);
     }
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gatescape.R;
 import com.example.gatescape.models.RequestInfo;
+import com.example.gatescape.util.TimeAgo;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +28,7 @@ public class T_RequestAdapter extends FirestoreRecyclerAdapter<RequestInfo , T_R
         holder.getUserName().setText(model.getUser().getName());
         holder.getUserBranch().setText(model.getUser().getBranch());
         holder.getUserSem().setText(model.getUser().getSem());
-        holder.getCreatedAt().setText("Created at : "+model.getCreatedAt());
+        holder.getCreatedAt().setText("Applied : "+ TimeAgo.getTimeAgo(model.getCreatedAt()));
     }
 
     @NonNull

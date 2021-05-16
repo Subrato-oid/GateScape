@@ -2,17 +2,10 @@ package com.example.gatescape.models;
 
 public class UserData {
 
-    String name;
-    String branch;
-    String sem;
-    String roll_no;
-    String email;
-    String phone_no;
-    String password;
-    Boolean UserType; // Teacher = true and Student = false
+    String name, branch, sem, roll_no, email, phone_no, parent_no , password , UserType;
 
-
-    public UserData(String name, String branch, String sem, String roll_no, String email, String phone_no, String password , Boolean userType) {
+    public UserData(String name, String branch, String sem, String roll_no, String email, String phone_no,
+                    String parent_no, String password , String userType) {
         this.name = name;
         this.branch = branch;
         this.sem = sem;
@@ -21,6 +14,7 @@ public class UserData {
         this.phone_no = phone_no;
         this.password = password;
         this.UserType = userType;
+        this.parent_no = parent_no;
     }
 
     public UserData() {
@@ -83,12 +77,20 @@ public class UserData {
         this.password = password;
     }
 
-    public Boolean getUserType() {
+    public String getUserType() {
         return UserType;
     }
 
-    public void setUserType(Boolean userType) {
+    public void setUserType(String userType) {
         UserType = userType;
+    }
+
+    public String getParent_no() {
+        return parent_no;
+    }
+
+    public void setParent_no(String parent_no) {
+        this.parent_no = parent_no;
     }
 
 }

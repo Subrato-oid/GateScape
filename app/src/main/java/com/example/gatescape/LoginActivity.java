@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.gatescape.daos.UserDao;
 import com.example.gatescape.models.UserData;
+import com.example.gatescape.util.FirebaseUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Button  Login , SignUp , ForgetPass , SignOut;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Button  Login , SignUp , ForgetPass ;
     TextInputLayout Email , Password;
     TextView welcome_text , continue_text;
 
@@ -58,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Login = findViewById(R.id.LoginButton1);
         SignUp = findViewById(R.id.SignUpButton1);
-//        SignOut = findViewById(R.id.SignOutButton);
         ForgetPass = findViewById(R.id.ForgotPassword);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password1);
@@ -88,13 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-//        SignOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signOut();
-//            }
-//        });
     }
 
     @Override
@@ -106,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             updateUI(currentUser , currentUser.getUid());
         }
     }
-
 
     private void firebaseAuth() {
 
@@ -125,8 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             updateUI(null , null);
                         }
                     }
@@ -137,18 +127,20 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser firebaseUser , String uid) {
 
         if(firebaseUser != null){
-            DocumentReference docRef = db.collection("users").document(uid);
+            DocumentReference docRef = db.collection("Users").document(uid);
             docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if(documentSnapshot.getBoolean("userType")){
-                        startActivity(new Intent(LoginActivity.this , TeacherActivity1.class));
+                    String user_check = documentSnapshot.getString("userType");
+                    assert user_check != null;
+                    if(user_check.equals("Teacher")){
+                        startActivity(new Intent(LoginActivity.this , TeacherActivity2.class));
                     }else {
-                        startActivity(new Intent(LoginActivity.this , UserActivity1.class));
+                        startActivity(new Intent(LoginActivity.this , UserActivity3.class));
                     }
+                    finish();
                 }
             });
-            startActivity(new Intent(LoginActivity.this , TeacherActivity1.class));
         }else{
             return ;
         }

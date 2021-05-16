@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gatescape.models.RequestInfo;
+import com.example.gatescape.util.TimeAgo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,7 +24,7 @@ public class UserActivity4 extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference ReqCollection = db.collection("Requests");
-    private String TAG = "UserActivity4";
+    private final String TAG = "UserActivity4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class UserActivity4 extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                 Log.i(TAG , "document INfo => "+ documentSnapshot.getData());
                 RequestInfo creator_Info = documentSnapshot.toObject(RequestInfo.class);
                 if(creator_Info != null) {
@@ -53,36 +55,16 @@ public class UserActivity4 extends AppCompatActivity {
                     creator_branch.setText("Branch : "+creator_Info.getUser().getBranch());
                     creator_sem.setText("Semester : "+creator_Info.getUser().getSem());
                     creator_roll_no.setText("Roll No. : "+creator_Info.getUser().getRoll_no());
-                    creation_time.setText("Created at : "+creator_Info.getCreatedAt());
+                    creation_time.setText("Created at : "+ TimeAgo.getTimeAgo(creator_Info.getCreatedAt()));
                     creator_reason.setText(creator_Info.getReason());
 
                     if(creator_Info.getApprove() == true){
-                        approve.setImageResource(R.drawable.ic_thumb_up);
+                        approve.setImageResource(R.drawable.approved2);
                     }else{
-                        approve.setImageResource(R.drawable.ic_thumb_down);
+                        approve.setImageResource(R.drawable.not_approved);
                     }
                 }
             }
         });
-
-//        isApprove.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                docRef.update("approve", true)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                Log.d(TAG, "DocumentSnapshot successfully updated!");
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error updating document", e);
-//                            }
-//                        });
-//            }
-//        });
-
     }
 }

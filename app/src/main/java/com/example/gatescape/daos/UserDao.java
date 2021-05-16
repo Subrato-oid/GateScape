@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.gatescape.models.RequestInfo;
 import com.example.gatescape.models.UserData;
+import com.example.gatescape.util.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
@@ -23,7 +25,7 @@ public class UserDao {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    CollectionReference userCollection = db.collection("users");
+    CollectionReference userCollection =  db.collection("Users");
     UserData user;
     FirebaseUser fireUser = mAuth.getCurrentUser();
     private String TAG = "UserDao";
@@ -46,15 +48,15 @@ public class UserDao {
                     Log.i(TAG , "Operation Successful");
 
                     Long currentTime = System.currentTimeMillis();
-                    Boolean approve = false;
-                    RequestInfo gp = new RequestInfo(text, user , currentTime , false);
                     CollectionReference ReqCollection = db.collection("Requests");
+                    RequestInfo gp = new RequestInfo(text, user , currentTime , false);
                     ReqCollection.document().set(gp);
                 }
             }
 
         });
     }
+
 
 //    public UserData getUserBy(){
 //        userCollection.whereEqualTo("email", "subratochowdhury111@gmail.com")

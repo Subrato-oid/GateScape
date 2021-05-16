@@ -1,105 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/white">
-
-    <TextView
-        android:id="@+id/welcomeText1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/bungee"
-        android:text="Welcome Back"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:transitionName="logo_text"/>
-
-    <TextView
-        android:id="@+id/continue_text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:text="Sign in to continue."
-        android:textSize="18sp"
-        android:transitionName="continue_text"/>
+    android:layout_width="match_parent"
+    android:background="@drawable/gradient1">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60sp"
-        android:orientation="vertical">
+        android:layout_width="361dp"
+        android:layout_height="508dp"
+        android:background="#80FFFFFF"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".LoginActivity">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/welcomeText1"
             android:layout_width="match_parent"
-            android:id="@+id/Email"
-            android:hint="Email Id"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pt_sans_caption_bold"
+            android:gravity="center"
+            android:text="Welcome Back"
+            android:textColor="#0483C8"
+            android:textSize="30sp"
+            android:transitionName="logo_text" />
 
-            <com.google.android.material.textfield.TextInputEditText
+        <TextView
+            android:id="@+id/continue_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in to continue."
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:transitionName="continue_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:transitionName="username_text" />
+                android:hint="Email Id">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:transitionName="username_text" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/Password1"
-            android:hint="Password"
-            app:passwordToggleEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Password1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:transitionName="password_text"/>
+                android:hint="Password"
+                app:passwordToggleEnabled="true">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:transitionName="password_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#00000000"
+            android:gravity="right"
+            android:text="Forgot password"
+            android:textColor="@color/black"
+            android:transitionName="middle_text" />
+
+
+        <Button
+            android:id="@+id/LoginButton1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_theme"
+            android:backgroundTint="@null"
+            android:text="Login"
+            android:textColor="@color/black"
+            android:transitionName="login_signUp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/SignUpButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="#00000000"
+            android:text="Don't have an account? SignUp"
+            android:textColor="@color/black"
+            android:transitionName="signUp_login" />
+
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/ForgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Forgot password"
-        android:gravity="right"
-        android:textColor="@color/black"
-        android:background="#00000000"
-        android:transitionName="middle_text"/>
-
-
-    <Button
-        android:id="@+id/LoginButton1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:background="@color/black"
-        android:transitionName="login_signUp"/>
-
-    <Button
-        android:id="@+id/SignUpButton1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Sign Up"
-        android:textColor="#fff"
-        android:background="#000"
-        android:transitionName="signUp_login"/>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.gatescape.Adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gatescape.R;
 import com.example.gatescape.models.RequestInfo;
+import com.example.gatescape.util.TimeAgo;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +29,7 @@ public class RequestAdapter extends FirestoreRecyclerAdapter<RequestInfo , Reque
         holder.getUserName().setText(model.getUser().getName());
         holder.getUserBranch().setText(model.getUser().getBranch());
         holder.getUserSem().setText(model.getUser().getSem());
-        holder.getCreatedAt().setText("Created at : "+model.getCreatedAt());
+        holder.getCreatedAt().setText("Created : "+ TimeAgo.getTimeAgo(model.getCreatedAt()));
     }
 
     @NonNull
@@ -77,7 +79,7 @@ public class RequestAdapter extends FirestoreRecyclerAdapter<RequestInfo , Reque
     }
 
     public interface OnItemClickListener{
-        public void OnItemClick(DocumentSnapshot documentSnapshot , int position);
+        void OnItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
     public void setOnItemCLickListener(OnItemClickListener listener){

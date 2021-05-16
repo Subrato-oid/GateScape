@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
+    android:background="#90DA95"
     tools:context=".UserActivity2"
     android:orientation="vertical">
 
@@ -19,7 +20,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -27,6 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Apply"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_theme"
         android:layout_marginTop="60dp" />
 
 </LinearLayout>
