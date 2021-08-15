@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".UserActivity3"
-    tools:openDrawer="start">
+    tools:openDrawer="stat">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_menu"
@@ -19,11 +19,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         tools:context=".UserActivity3"
-        android:background="#90E0EF">
+        android:background="@drawable/gradient2">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -41,43 +41,52 @@
             android:id="@+id/U_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/outline2"
-            android:backgroundTint="#5C090909"
-            android:fontFamily="@font/pt_sans_caption_bold"
-            android:text="GatePass Application"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="10dp" />
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="GATEPASS APPLICATION"
+            android:textAlignment="textStart"
+            android:textColor="#5685CD"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:layout_editor_absoluteX="5dp" />
+
+        <ImageView
+            android:id="@+id/line_image"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:backgroundTint="@color/black"
+            android:background="@drawable/line"
+            android:scaleType="center"
+            app:layout_constraintTop_toBottomOf="@+id/U_list"
+            android:contentDescription="TODO" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/U_list"
             tools:listitem="@layout/request_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            app:icon="@drawable/ic_edit"
+            app:iconTint="@color/teal_700"
+            android:text="Reason"
+            app:iconGravity="textStart"
             android:layout_marginBottom="40dp"
-            android:clickable="true"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_add" />
+            android:textAlignment="textEnd"
+            android:textColor="@color/teal_700" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

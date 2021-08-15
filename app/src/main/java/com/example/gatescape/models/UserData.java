@@ -1,6 +1,7 @@
 package com.example.gatescape.models;
 
-public class UserData {
+public class
+UserData {
 
     String name, branch, sem, roll_no, email, phone_no, parent_no , password , UserType;
 

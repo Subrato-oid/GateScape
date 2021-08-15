@@ -4,6 +4,15 @@ plugins {
 }
 
 android {
+
+//    signingConfigs {
+//        release {
+//            storeFile file('C:\\Users\\Subrato\\Desktop\\gatescape\\GateScape.jks')
+//            storePassword 'Subrato111'
+//            keyPassword 'Subrato111'
+//            keyAlias 'Key2'
+//        }
+//    }
     compileSdkVersion 30
 
     defaultConfig {
@@ -39,8 +48,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.media:media:1.3.1'
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
-
-
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     // Google
     implementation 'com.google.android.gms:play-services-auth:19.0.0'

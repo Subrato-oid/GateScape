@@ -9,9 +9,10 @@
     android:background="@drawable/gradient1">
 
     <LinearLayout
-        android:layout_width="361dp"
-        android:layout_height="508dp"
-        android:background="#80FFFFFF"
+        android:id="@+id/linearLayout"
+        android:layout_width="359dp"
+        android:layout_height="465dp"
+        android:background="#CCFFFFFF"
         android:orientation="vertical"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,11 +25,11 @@
             android:id="@+id/welcomeText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/pt_sans_caption_bold"
             android:gravity="center"
             android:text="Welcome Back"
-            android:textColor="#0483C8"
+            android:textColor="#039BE5"
             android:textSize="30sp"
             android:transitionName="logo_text" />
 
@@ -101,7 +102,7 @@
             android:background="@drawable/button_theme"
             android:backgroundTint="@null"
             android:text="Login"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:transitionName="login_signUp"
             app:backgroundTint="@null" />
 
@@ -109,12 +110,26 @@
             android:id="@+id/SignUpButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
             android:background="#00000000"
             android:text="Don't have an account? SignUp"
-            android:textColor="@color/black"
+            android:textColor="#039BE5"
             android:transitionName="signUp_login" />
 
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/SignUpButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
+        android:background="@drawable/gradient3"
+        android:text="SignUp as a Teacher"
+        android:textColor="#039BE5"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

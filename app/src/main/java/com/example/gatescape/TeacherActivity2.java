@@ -67,7 +67,7 @@ public class TeacherActivity2 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.setting) {
-                    Toast.makeText(TeacherActivity2.this, "set hai boss", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TeacherActivity2.this, "Currently no settings are available", Toast.LENGTH_LONG).show();
                 } else if (itemId == R.id.SignOut) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(TeacherActivity2.this, LoginActivity.class));

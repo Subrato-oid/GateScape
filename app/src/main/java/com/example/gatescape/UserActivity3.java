@@ -38,6 +38,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseOptions;
@@ -92,7 +93,7 @@ public class UserActivity3 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.setting) {
-                    Toast.makeText(UserActivity3.this, "set hai boss", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserActivity3.this, "Currently no settings are available", Toast.LENGTH_LONG).show();
                 } else if (itemId == R.id.SignOut) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(UserActivity3.this, LoginActivity.class));
@@ -102,7 +103,7 @@ public class UserActivity3 extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton apply = findViewById(R.id.add);
+        ExtendedFloatingActionButton apply = findViewById(R.id.add);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

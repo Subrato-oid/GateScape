@@ -25,13 +25,13 @@ public class UserDao {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    CollectionReference userCollection =  db.collection("Users");
+    CollectionReference userCollection = db.collection("Users");
     UserData user;
     FirebaseUser fireUser = mAuth.getCurrentUser();
     private String TAG = "UserDao";
 
-    public void addUser(UserData user , String uid){
-        if(user != null){
+    public void addUser(UserData user, String uid) {
+        if (user != null) {
             userCollection.document(uid).set(user);
         }
     }
@@ -43,37 +43,17 @@ public class UserDao {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(UserData.class);
-                if(user != null){
-                    Log.i(TAG , "User is not NULL !");
-                    Log.i(TAG , "Operation Successful");
+                if (user != null) {
+                    Log.i(TAG, "User is not NULL !");
+                    Log.i(TAG, "Operation Successful");
 
                     Long currentTime = System.currentTimeMillis();
                     CollectionReference ReqCollection = db.collection("Requests");
-                    RequestInfo gp = new RequestInfo(text, user , currentTime , false);
+                    RequestInfo gp = new RequestInfo(text, user, currentTime, false);
                     ReqCollection.document().set(gp);
                 }
             }
 
         });
     }
-
-
-//    public UserData getUserBy(){
-//        userCollection.whereEqualTo("email", "subratochowdhury111@gmail.com")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                user = document.toObject(UserData.class);
-////                                Log.d(TAG, document.getId() + " => " + user.getEmail());
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
-//        return user;
-//    }
 }

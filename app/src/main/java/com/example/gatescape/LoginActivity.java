@@ -22,6 +22,7 @@ import com.example.gatescape.models.UserData;
 import com.example.gatescape.util.FirebaseUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Button  Login , SignUp , ForgetPass ;
+    Button  Login , SignUp , ForgetPass, TeacherSignUp ;
     TextInputLayout Email , Password;
     TextView welcome_text , continue_text;
 
@@ -59,11 +60,12 @@ public class LoginActivity extends AppCompatActivity {
 
         Login = findViewById(R.id.LoginButton1);
         SignUp = findViewById(R.id.SignUpButton1);
+        TeacherSignUp = findViewById(R.id.SignUpButton2);
         ForgetPass = findViewById(R.id.ForgotPassword);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password1);
         welcome_text = findViewById(R.id.welcomeText1);
-        continue_text =findViewById(R.id.continue_text1);
+        continue_text = findViewById(R.id.continue_text1);
 
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +90,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        TeacherSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this , Teacher_signup.class));
+            }
+        });
     }
 
     @Override
-    public void onStart() {
+    public void onStart(){
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -127,24 +136,31 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser firebaseUser , String uid) {
 
         if(firebaseUser != null){
+
             DocumentReference docRef = db.collection("Users").document(uid);
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    String user_check = documentSnapshot.getString("userType");
-                    assert user_check != null;
-                    if(user_check.equals("Teacher")){
-                        startActivity(new Intent(LoginActivity.this , TeacherActivity2.class));
-                    }else {
-                        startActivity(new Intent(LoginActivity.this , UserActivity3.class));
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            startActivity(new Intent(LoginActivity.this , UserActivity3.class));
+                            finish();
+                        } else {
+                            startActivity(new Intent(LoginActivity.this , TeacherActivity2.class));
+                            finish();
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
                     }
-                    finish();
                 }
             });
+
         }else{
             return ;
         }
-
     }
 
     // validation function for Roll_no and Password , to ensure that they are not Empty.

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,10 +59,12 @@ public class UserActivity4 extends AppCompatActivity {
                     creation_time.setText("Created at : "+ TimeAgo.getTimeAgo(creator_Info.getCreatedAt()));
                     creator_reason.setText(creator_Info.getReason());
 
+                    creator_reason.setMovementMethod(new ScrollingMovementMethod());
+
                     if(creator_Info.getApprove() == true){
-                        approve.setImageResource(R.drawable.approved2);
+                        approve.setImageResource(R.drawable.fapproved);
                     }else{
-                        approve.setImageResource(R.drawable.not_approved);
+                        approve.setImageResource(R.drawable.wait1);
                     }
                 }
             }

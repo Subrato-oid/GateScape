@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.gatescape.daos.RequestDao;
 import com.example.gatescape.daos.UserDao;
+import com.example.gatescape.models.TeacherData;
 import com.example.gatescape.models.UserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +42,7 @@ import java.util.Objects;
 public class UserActivity2 extends AppCompatActivity {
 
     Button apply_button;
-    UserData tea_user;
+    TeacherData tea_user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -57,16 +58,16 @@ public class UserActivity2 extends AppCompatActivity {
         apply_button = findViewById(R.id.apply_button);
         Reason_text = findViewById(R.id.Reason_text);
 
-        CollectionReference colRef = db.collection("Users");
+        CollectionReference colRef = db.collection("Teachers");
 
-        colRef.whereEqualTo("userType" , "Teacher")
+        colRef.whereEqualTo("design" , "Head of Department")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                tea_user = document.toObject(UserData.class);
+                                tea_user = document.toObject(TeacherData.class);
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
