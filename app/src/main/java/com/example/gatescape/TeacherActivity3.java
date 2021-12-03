@@ -42,7 +42,7 @@ public class TeacherActivity3 extends AppCompatActivity {
     String applicant_no;
     String guardian_no;
     String username;
-    private final String guard_no = "+919907606659";
+    private final String guard_no = "+918319504898";
     String code = String.valueOf(Ver_code.OTP(06));
     public static final int SMS_REQUEST_CODE = 1;
 

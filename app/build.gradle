@@ -54,14 +54,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:27.0.0')
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-auth'
 
     // Firebase UI
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
-    implementation 'com.google.firebase:firebase-firestore:23.0.0'
+    implementation 'com.google.firebase:firebase-firestore:24.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     // FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'

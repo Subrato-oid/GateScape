@@ -29,7 +29,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class TeacherActivity2 extends AppCompatActivity {
+public class
+TeacherActivity2 extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private T_RequestAdapter adapter;
