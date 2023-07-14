@@ -29,8 +29,8 @@ To run the application, follow these steps:
 ![Screen 4](./screenshots/image-011.png)
 ![Screen 5](./screenshots/image-012.png)
 ![Screen 6](./screenshots/image-013.png)
-![Screen 7](./screenshots/image-015.png)
-![Screen 8](./screenshots/image-014.png)
+![Screen 7](./screenshots/image-014.png)
+![Screen 8](./screenshots/image-015.png)
 ![Screen 9](./screenshots/image-016.png)
 
 ## Credits
