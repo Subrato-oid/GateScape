@@ -25,8 +25,8 @@ To run the application, follow these steps:
 4. Collect coins to increase your score.
 
 ## Screenshots
-![Screen 1](./screenshots/image-008.png){: width="50%"}
-![Screen 2](./screenshots/image-009.png){: width="50%"}
+![Screen 1|300](./screenshots/image-008.png)
+![Screen 2|300](./screenshots/image-009.png)
 ![Screen 3](./screenshots/image-010.png){: width="50%"}
 ![Screen 4](./screenshots/image-011.png){: width="50%"}
 ![Screen 5](./screenshots/image-012.png){: width="50%"}
