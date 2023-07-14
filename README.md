@@ -1,6 +1,4 @@
-# Project Name
-
-Gate Escape
+# Gate Escape
 
 ## Description
 
@@ -25,15 +23,15 @@ To run the application, follow these steps:
 4. Collect coins to increase your score.
 
 ## Screenshots
-![Screen 1](./screenshots/image-008.png|width=100px)
-![Screen 2](./screenshots/image-009.png|width=100px)
+![Screen 1](./screenshots/image-008.png)
+![Screen 2](./screenshots/image-009.png)
 ![Screen 3](./screenshots/image-010.png)
 ![Screen 4](./screenshots/image-011.png)
 ![Screen 5](./screenshots/image-012.png)
 ![Screen 6](./screenshots/image-013.png)
 ![Screen 7](./screenshots/image-014.png)
 ![Screen 8](./screenshots/image-015.png)
-![Screen 9](./screenshots/image-016.jpg)
+![Screen 9](./screenshots/image-016.png)
 
 ## Credits
 
